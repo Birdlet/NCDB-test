@@ -1,0 +1,36 @@
+{% extends 'database/base.html' %}
+
+{% block content %}
+
+<table  cellpadding="10" cellspacing="10">
+	<tr>
+	<th>Mol ID</th>
+	<th>SMILES</th>
+	</tr>
+
+{% for mol in mols %}
+	<tr>
+	<td><a href="{{ mol.id_mol }}">{{ mol.id_mol }}</a></td>
+	<td>{{ mol.smi_mol }}</td>
+	</tr>
+{% endfor %}
+</table>
+
+
+<div class="pagination">
+	<span class="step-links">
+        {% if mols.has_previous %}
+            <a href="?page={{ mols.previous_page_number }}">previous</a>
+        {% endif %}
+
+	<span class="current">
+			Page {{ mols.number }} of {{ mols.paginator.num_pages }}.
+	</span>
+
+	{% if mols.has_next %}
+		<a href="?page={{ mols.next_page_number }}">next</a>
+	{% endif %}
+    </span>
+</div>
+
+{% endblock %}
